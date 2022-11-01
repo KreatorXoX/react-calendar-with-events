@@ -1,0 +1,44 @@
+.day {
+  /* border: 0.5px solid rgb(172, 196, 66); */
+  box-shadow: 0px 0px 1.5px 0px rgba(172, 196, 66, 1);
+  cursor: pointer;
+}
+
+.day:hover:not(.active) {
+  background-color: rgba(113, 113, 235, 0.5);
+  border-radius: 8px;
+}
+.day:hover:not(.active) p {
+  color: #f8f8f8;
+}
+
+.dayLayout {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  padding: 1.25rem 0;
+}
+.dayName {
+  font-size: 0.85;
+  font-weight: 600;
+  color: rgb(119, 88, 255);
+}
+
+.dayNumber {
+  color: rgb(179, 124, 24);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.active,
+.active p {
+  background-color: rgb(113, 113, 235);
+  color: #f8f8f8;
+  border-radius: 8px;
+}
+.notActiveMonth {
+  background-color: #efefef;
+}
+
+.notActiveMonth .dayNumber {
+  color: grey;
+}
