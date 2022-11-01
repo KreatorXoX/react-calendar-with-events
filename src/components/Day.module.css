@@ -5,7 +5,7 @@
 }
 
 .day:hover:not(.active) {
-  background-color: rgba(113, 113, 235, 0.5);
+  background-color: rgba(113, 113, 235, 0.6);
   border-radius: 8px;
 }
 .day:hover:not(.active) p {
@@ -29,11 +29,13 @@
   font-size: 0.75rem;
   font-weight: 600;
 }
-.active,
-.active p {
+.active {
   background-color: rgb(113, 113, 235);
-  color: #f8f8f8;
+
   border-radius: 8px;
+}
+.active p {
+  color: #f8f8f8;
 }
 .notActiveMonth {
   background-color: #efefef;
@@ -41,4 +43,11 @@
 
 .notActiveMonth .dayNumber {
   color: grey;
+}
+.selected {
+  background-color: rgba(113, 113, 235, 0.4);
+  border-radius: 0.5rem;
+}
+.selected p {
+  color: #f8f8f8 !important;
 }

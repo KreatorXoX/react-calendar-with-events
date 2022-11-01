@@ -1,5 +1,5 @@
 .taskbar {
   display: flex;
   background: rgb(250, 249, 249);
-  place-content: center;
+  place-content: start;
 }

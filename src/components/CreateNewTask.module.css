@@ -1,0 +1,108 @@
+.button {
+  border: none;
+  box-shadow: 0 0 3px 1px #ccc;
+  background-color: #fff;
+  display: flex;
+  gap: 1rem;
+  border-radius: 0.2rem;
+  width: 10rem;
+  height: 3rem;
+  place-items: center;
+  place-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 1rem;
+  color: rgb(97, 97, 97);
+  transition: all 0.15s ease-in;
+}
+.button:hover {
+  /* scale: 1.01; */
+  box-shadow: 0px 0px 1px 2px #ccc;
+  cursor: pointer;
+}
+
+.button:active {
+  box-shadow: inset 1px 5px 5px 0px #ccc;
+}
+.modalButton {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.modalButton button {
+  border: none;
+  box-shadow: 0 0 3px 1px #ccc;
+  background-color: rgb(72, 158, 255);
+  border-radius: 0.2rem;
+  width: 5rem;
+  height: 3rem;
+  cursor: pointer;
+  place-items: center;
+  place-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+  transition: all 0.15s ease-in;
+}
+.modalButton button:hover {
+  box-shadow: 0px 0px 1px 2px rgb(72, 158, 255);
+}
+.modalButton button:active {
+  box-shadow: inset 1px 5px 5px 0px rgb(72, 158, 255);
+}
+
+.formContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+.labels {
+  display: flex;
+  justify-content: flex-start;
+  place-items: center;
+  width: 85%;
+  margin: 0.3rem;
+  gap: 5%;
+}
+.color {
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  place-items: center;
+  place-content: center;
+}
+.active {
+  color: white;
+}
+.formInput {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+label {
+  font-size: 0.9rem;
+  color: rgb(97, 97, 97, 0.8);
+  font-weight: bold;
+}
+input {
+  margin: 0.5em;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc;
+  padding: 0.5em;
+  border-radius: 0.5rem;
+  outline: none;
+  caret-color: #ccc;
+  color: rgb(97, 97, 97);
+  font-weight: 600;
+}
+input:active,
+input:focus {
+  box-shadow: 0 0 3px 1px rgba(118, 150, 255, 0.85);
+}
+input::placeholder {
+  color: #ccc;
+}

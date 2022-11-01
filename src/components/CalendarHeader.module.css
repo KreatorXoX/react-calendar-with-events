@@ -18,7 +18,10 @@
   margin-left: 1em;
   flex-direction: column;
   place-items: center;
-  row-gap: 1rem;
+  row-gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 2px 0px rgba(105, 53, 156, 0.4);
 }
 .calendarActions {
   display: flex;
