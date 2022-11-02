@@ -11,10 +11,9 @@ const Day = ({ day, rowTitle }) => {
 
   const activeDay = isCurrentDay() ? styles.active : "";
   const notActiveMonth = isCurrentMonth() ? "" : styles.notActiveMonth;
-  const selected =
-    day.format("DD--MM--YY") === selectedDay ? styles.selected : "";
+  const selected = day === selectedDay ? styles.selected : "";
   const selectDayHandler = () => {
-    setSelectedDay(day.format("DD--MM--YY"));
+    setSelectedDay(day);
   };
   return (
     <>
