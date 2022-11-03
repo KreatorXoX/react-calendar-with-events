@@ -2,4 +2,8 @@
   display: flex;
   background: rgb(250, 249, 249);
   place-content: start;
+  width: 100%;
+  max-width: 71.125rem; /* because max width of the day col is 10 rem and gap is 3px 7*10rem + 3px*6 = 71.125rem */
+  margin: auto;
+  place-content: start;
 }

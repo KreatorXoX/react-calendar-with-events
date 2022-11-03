@@ -59,7 +59,7 @@
 .task {
   width: 100%;
   max-width: 20rem;
-  border-radius: 1rem;
+  border-radius: 0.2rem;
   color: white;
   font-size: 0.75rem;
   font-weight: 200;
@@ -72,12 +72,14 @@
 }
 .task p {
   width: 100%;
-  margin-left: 0.5rem;
-  max-width: 3rem;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  /* max-width: 3rem; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* 
 @media (min-width: 500px) {
   .task p {
     width: 100%;
@@ -90,4 +92,4 @@
     max-width: 10rem;
     font-size: 0.85rem;
   }
-}
+} */
