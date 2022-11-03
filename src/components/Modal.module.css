@@ -10,7 +10,9 @@
 }
 
 .modalHeader {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   padding: 0.5rem;

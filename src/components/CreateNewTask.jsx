@@ -1,4 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { CalendarCtx } from "../context/CalendarContext";
 import Modal from "./Modal";
 import taskImage from "../assets/task.png";
@@ -6,24 +8,86 @@ import tag from "../assets/tag.png";
 import time from "../assets/time.png";
 import styles from "./CreateNewTask.module.css";
 const CreateNewTask = () => {
-  const { selectedDay, currentDay } = useContext(CalendarCtx);
-  const [openModal, setOpenModal] = useState(false);
+  const {
+    selectedDay,
+    currentDay,
+    taskDispatch,
+    openModal,
+    setOpenModal,
+    selectedTask,
+    setSelectedTask,
+  } = useContext(CalendarCtx);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [labelSelected, setLabelSelected] = useState("#FF97C1");
+  const [labelSelected, setLabelSelected] = useState(
+    selectedTask ? selectedTask.labelColor : "#FF97C1"
+  );
+
+  useEffect(() => {
+    if (selectedTask) {
+      setTitle(selectedTask.title);
+      setDescription(selectedTask.description);
+      setLabelSelected(selectedTask.labelColor);
+    }
+  }, [selectedTask]);
 
   const showDate = `${
     selectedDay
-      ? selectedDay.format("dddd MMMM YYYY")
-      : currentDay.format("dddd MMMM YYYY")
+      ? selectedDay.format("ddd - d MMMM - YYYY")
+      : currentDay.format("ddd - d MMMM - YYYY")
   }`;
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(title, description);
+    const taskOBJ = {
+      title: title,
+      description: description,
+      day: selectedTask
+        ? selectedTask.day
+        : selectedDay
+        ? selectedDay.valueOf()
+        : currentDay.valueOf(), // because dayjs object cannot be stringified
+      labelColor: labelSelected,
+      id: selectedTask ? selectedTask.id : Date.now(), // some unique id
+    };
+    if (selectedTask) {
+      taskDispatch({
+        type: "UPDATE_TASK",
+        payload: taskOBJ,
+      });
+    } else {
+      taskDispatch({
+        type: "ADD_TASK",
+        payload: taskOBJ,
+      });
+    }
+
+    setTitle("");
+    setDescription("");
+    setLabelSelected("#FF97C1");
+    setSelectedTask(null);
     setOpenModal(false);
   };
 
-  const labelColors = ["#FF97C1", "#FEB139", "#583D72", "#829460", "#D61C4E"];
+  const deleteHandler = (id) => {
+    taskDispatch({
+      type: "REMOVE_TASK",
+      payload: id,
+    });
+    setTitle("");
+    setDescription("");
+    setLabelSelected("#FF97C1");
+    setSelectedTask(null);
+    setOpenModal(false);
+  };
+  const labelColors = [
+    "#FF006E",
+    "#FB5607",
+    "#3A86FF",
+    "#8338EC",
+    "#E70E02",
+    "#1F1300",
+  ];
 
   return (
     <React.Fragment>
@@ -34,39 +98,59 @@ const CreateNewTask = () => {
       {openModal && (
         <Modal
           onSubmit={handleFormSubmit}
-          onClick={() => setOpenModal(false)}
+          onClick={() => {
+            setSelectedTask(null);
+            setOpenModal(false);
+          }}
           show={openModal}
           header={"Add New Task"}
+          headerButton={
+            <>
+              <button
+                onClick={() => {
+                  if (!selectedTask) return;
+                  deleteHandler(selectedTask.id);
+                }}
+                className={styles.deleteBtn}
+              >
+                <FontAwesomeIcon icon={faTrashCan} />
+              </button>
+            </>
+          }
           footer={
             <div className={styles.modalButton}>
-              <button onClick={() => setOpenModal(false)}>Cancel</button>
+              <button
+                onClick={() => {
+                  setOpenModal(false);
+                  setSelectedTask(null);
+                }}
+              >
+                Cancel
+              </button>
               <button type="submit">Save</button>
             </div>
           }
         >
           <div className={styles.formContent}>
             <div className={styles.formInput}>
-              <label htmlFor="header">Task Title</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => {
                   setTitle(e.target.value);
                 }}
-                id="header"
                 placeholder="Task Header"
               />
             </div>
             <div className={styles.formInput}>
-              <label htmlFor="description">Description</label>
-              <input
+              <textarea
                 type="text"
                 value={description}
                 onChange={(e) => {
                   setDescription(e.target.value);
                 }}
-                id="description"
                 placeholder="Task Description"
+                rows={4}
               />
             </div>
             <div className={styles.details}>

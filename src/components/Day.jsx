@@ -4,7 +4,8 @@ import styles from "./Day.module.css";
 import dayjs from "dayjs";
 
 const Day = ({ day, rowTitle }) => {
-  const { selectedDay, setSelectedDay } = useContext(CalendarCtx);
+  const { selectedDay, setSelectedDay, tasks, setSelectedTask, setOpenModal } =
+    useContext(CalendarCtx);
   const isCurrentDay = () =>
     day.format("DD--MM--YY") === dayjs().format("DD--MM--YY");
   const isCurrentMonth = () => day.format("MM") === dayjs().format("MM");
@@ -13,7 +14,11 @@ const Day = ({ day, rowTitle }) => {
   const notActiveMonth = isCurrentMonth() ? "" : styles.notActiveMonth;
   const selected = day === selectedDay ? styles.selected : "";
   const selectDayHandler = () => {
-    setSelectedDay(day);
+    if (day === selectedDay) {
+      setSelectedDay(null);
+    } else {
+      setSelectedDay(day);
+    }
   };
   return (
     <>
@@ -23,6 +28,25 @@ const Day = ({ day, rowTitle }) => {
       >
         <header className={styles.dayLayout}>
           <p className={styles.dayNumber}>{day.format("DD")}</p>
+
+          {tasks.map((u, idx) =>
+            day.format("DD-MM-YY") ===
+            dayjs(new Date(u.day)).format("DD-MM-YY") ? (
+              <div
+                key={idx}
+                style={{ backgroundColor: `${u.labelColor}` }}
+                className={styles.task}
+                onClick={() => {
+                  setSelectedTask(u);
+                  setOpenModal(true);
+                }}
+              >
+                <p> {u.title}</p>
+              </div>
+            ) : (
+              ""
+            )
+          )}
         </header>
       </div>
     </>

@@ -50,7 +50,15 @@
 .modalButton button:active {
   box-shadow: inset 1px 5px 5px 0px rgb(72, 158, 255);
 }
-
+.deleteBtn {
+  color: #fff;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+.deleteBtn:hover {
+  scale: 1.04;
+  cursor: pointer;
+}
 .formContent {
   width: 100%;
   display: flex;
@@ -95,7 +103,8 @@ label {
   color: rgb(97, 97, 97, 0.8);
   font-weight: bold;
 }
-input {
+input,
+textarea {
   margin: 0.5em;
   border: none;
   border-bottom: 1px solid #ccc;
@@ -107,9 +116,12 @@ input {
   transition: border 0.2s ease-in-out;
 }
 input:active,
-input:focus {
+input:focus,
+textarea:active,
+textarea:focus {
   border-bottom: 1px solid rgba(118, 150, 255, 0.85);
 }
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: #ccc;
 }
