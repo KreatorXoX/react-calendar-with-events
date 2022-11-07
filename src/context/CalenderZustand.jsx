@@ -1,27 +1,29 @@
-import create from "zustand";
-import { devtools, persist } from "zustand/middleware";
-import dayjs from "dayjs";
+import create from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
+import dayjs from 'dayjs'
+
+const initialMonth = dayjs().month()
 
 export const useCalendarStore = create(
   devtools(
     persist(
-      (set) => ({
+      set => ({
         currentDay: null,
         setCurrentDay: () => set({ currentDay: dayjs() }),
-        monthIdx: 0,
-        setMonthIdx: () => {},
+        monthIdx: initialMonth,
+        setMonthIdx: value => set({ monthIdx: value }),
         selectedDay: null,
-        setSelectedDay: (day) => {},
+        setSelectedDay: day => set({ selectedDay: day }),
         openModal: false,
-        setOpenModal: () => {},
-        selectedTask: {},
-        setSelectedTask: () => {},
+        setOpenModal: value => set({ openModal: value }),
+        selectedTask: null,
+        setSelectedTask: task => set({ selectedTask: task }),
         tasks: [],
-        taskDispatch: ({ type, payload }) => {},
+        taskDispatch: ({ type, payload }) => {}
       }),
       {
-        name: "CalendarStore",
+        name: 'CalendarStore'
       }
     )
   )
-);
+)
