@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { CalendarCtx } from "../context/CalendarContext";
+import { useCalendarStore } from "../context/CalenderZustand";
 import Modal from "./Modal";
 import taskImage from "../assets/task.png";
 import tag from "../assets/tag.png";
@@ -9,9 +10,11 @@ import time from "../assets/time.png";
 import styles from "./CreateNewTask.module.css";
 import dayjs from "dayjs";
 const CreateNewTask = () => {
+  const currentDay = useCalendarStore((state) => state.currentDay);
+
   const {
     selectedDay,
-    currentDay,
+
     taskDispatch,
     openModal,
     setOpenModal,
@@ -38,7 +41,7 @@ const CreateNewTask = () => {
       ? selectedDay.format("ddd - D MMMM - YYYY")
       : selectedTask
       ? dayjs(new Date(selectedTask.day)).format("ddd - D MMMM - YYYY")
-      : currentDay.format("ddd - D MMMM - YYYY")
+      : dayjs(currentDay).format("ddd - D MMMM - YYYY")
   }`;
   const handleFormSubmit = (e) => {
     e.preventDefault();

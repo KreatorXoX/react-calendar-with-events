@@ -26,7 +26,7 @@ const CalendarProvider = (props) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [currentDay] = useState(dayjs());
+
   const [tasks, taskDispatch] = useReducer(taskReducer, [], taskInit);
 
   useEffect(() => {
@@ -40,7 +40,6 @@ const CalendarProvider = (props) => {
         setMonthIdx,
         selectedDay,
         setSelectedDay,
-        currentDay,
         taskDispatch,
         tasks,
         openModal,

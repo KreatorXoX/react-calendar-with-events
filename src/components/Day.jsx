@@ -1,30 +1,26 @@
-import React, { useContext } from 'react'
-import { CalendarCtx } from '../context/CalendarContext'
-import styles from './Day.module.css'
-import dayjs from 'dayjs'
+import React, { useContext } from "react";
+import { CalendarCtx } from "../context/CalendarContext";
+
+import styles from "./Day.module.css";
+import dayjs from "dayjs";
 
 const Day = ({ day, rowTitle }) => {
-  const {
-    selectedDay,
-    setSelectedDay,
-    tasks,
-    setSelectedTask,
-    setOpenModal
-  } = useContext(CalendarCtx)
+  const { selectedDay, setSelectedDay, tasks, setSelectedTask, setOpenModal } =
+    useContext(CalendarCtx);
   const isCurrentDay = () =>
-    day.format('DD--MM--YY') === dayjs().format('DD--MM--YY')
-  const isCurrentMonth = () => day.format('MM YY') === dayjs().format('MM YY')
+    day.format("DD--MM--YY") === dayjs().format("DD--MM--YY");
+  const isCurrentMonth = () => day.format("MM YY") === dayjs().format("MM YY");
 
-  const activeDay = isCurrentDay() ? styles.active : ''
-  const notActiveMonth = isCurrentMonth() ? '' : styles.notActiveMonth
-  const selected = day === selectedDay ? styles.selected : ''
+  const activeDay = isCurrentDay() ? styles.active : "";
+  const notActiveMonth = isCurrentMonth() ? "" : styles.notActiveMonth;
+  const selected = day === selectedDay ? styles.selected : "";
   const selectDayHandler = () => {
     if (day === selectedDay) {
-      setSelectedDay(null)
+      setSelectedDay(null);
     } else {
-      setSelectedDay(day)
+      setSelectedDay(day);
     }
-  }
+  };
   return (
     <>
       <div
@@ -32,30 +28,30 @@ const Day = ({ day, rowTitle }) => {
         className={`${styles.day} ${activeDay} ${notActiveMonth} ${selected}`}
       >
         <header className={styles.dayLayout}>
-          <p className={styles.dayNumber}>{day.format('DD')}</p>
+          <p className={styles.dayNumber}>{day.format("DD")}</p>
 
           {tasks.map((u, idx) =>
-            day.format('DD-MM-YY') ===
-            dayjs(new Date(u.day)).format('DD-MM-YY') ? (
+            day.format("DD-MM-YY") ===
+            dayjs(new Date(u.day)).format("DD-MM-YY") ? (
               <div
                 key={idx}
                 style={{ backgroundColor: `${u.labelColor}` }}
                 className={styles.task}
                 onClick={() => {
-                  setSelectedTask(u)
-                  setOpenModal(true)
+                  setSelectedTask(u);
+                  setOpenModal(true);
                 }}
               >
                 <p> {u.title}</p>
               </div>
             ) : (
-              ''
+              ""
             )
           )}
         </header>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Day
+export default Day;
