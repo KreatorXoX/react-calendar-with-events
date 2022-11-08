@@ -1,12 +1,12 @@
 import React from "react";
-//import { CalendarCtx } from '../context/CalendarContext'
 import { useCalendarStore } from "../context/CalenderZustand";
 import dayjs from "dayjs";
+
 import logo from "../assets/react.svg";
+
 import styles from "./CalendarHeader.module.css";
 
 const CalendarHeader = () => {
-  //const { monthIdx, setMonthIdx } = useContext(CalendarCtx)
   const monthIdx = useCalendarStore((state) => state.monthIdx);
   const setMonthIdx = useCalendarStore((state) => state.setMonthIdx);
 

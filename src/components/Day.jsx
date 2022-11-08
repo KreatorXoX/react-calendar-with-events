@@ -1,15 +1,13 @@
 import React from "react";
-//import { CalendarCtx } from "../context/CalendarContext";
-import { useCalendarStore } from "../context/CalenderZustand";
-import styles from "./Day.module.css";
 import dayjs from "dayjs";
 
+import { useCalendarStore } from "../context/CalenderZustand";
+
+import styles from "./Day.module.css";
+
 const Day = ({ day, isSelected }) => {
-  const selectedDay = useCalendarStore((state) => state.selectedDay);
-  const setSelectedDay = useCalendarStore((state) => state.setSelectedDay);
-  const setOpenModal = useCalendarStore((state) => state.setOpenModal);
-  const setSelectedTask = useCalendarStore((state) => state.setSelectedTask);
-  const tasks = useCalendarStore((state) => state.tasks);
+  const { selectedDay, setSelectedDay, setOpenModal, setSelectedTask, tasks } =
+    useCalendarStore((state) => state, shallow);
 
   const isCurrentDay = () =>
     day.format("DD--MM--YY") === dayjs().format("DD--MM--YY");

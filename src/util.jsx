@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 
 export function getMonth(month = dayjs().month()) {
-  
   const year = dayjs().year();
   const firstDayOfMonth = dayjs(new Date(year, month, 0)).day();
   let currentMonthCount = 0 - firstDayOfMonth;

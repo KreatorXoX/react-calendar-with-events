@@ -1,26 +1,28 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import dayjs from "dayjs";
+
+import Modal from "./Modal";
+import { useCalendarStore } from "../context/CalenderZustand";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-//import { CalendarCtx } from "../context/CalendarContext";
-import { useCalendarStore } from "../context/CalenderZustand";
-import Modal from "./Modal";
 import taskImage from "../assets/task.png";
 import tag from "../assets/tag.png";
 import time from "../assets/time.png";
-import styles from "./CreateNewTask.module.css";
-import dayjs from "dayjs";
-const CreateNewTask = () => {
-  const currentDay = useCalendarStore((state) => state.currentDay);
-  const selectedDay = useCalendarStore((state) => state.selectedDay);
-  const openModal = useCalendarStore((state) => state.openModal);
-  const setOpenModal = useCalendarStore((state) => state.setOpenModal);
-  const selectedTask = useCalendarStore((state) => state.selectedTask);
-  const setSelectedTask = useCalendarStore((state) => state.setSelectedTask);
-  const addTask = useCalendarStore((state) => state.addTask);
-  const updateTask = useCalendarStore((state) => state.updateTask);
-  const deleteTask = useCalendarStore((state) => state.deleteTask);
 
-  //const { taskDispatch } = useContext(CalendarCtx)
+import styles from "./CreateNewTask.module.css";
+const CreateNewTask = () => {
+  const {
+    currentDay,
+    selectedDay,
+    openModal,
+    setOpenModal,
+    selectedTask,
+    setSelectedTask,
+    addTask,
+    updateTask,
+    deleteTask,
+  } = useCalendarStore((state) => state);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -56,20 +58,9 @@ const CreateNewTask = () => {
       labelColor: labelSelected,
       id: selectedTask ? selectedTask.id : Date.now(), // some unique id
     };
-    if (selectedTask) {
-      updateTask(taskOBJ);
 
-      // taskDispatch({
-      //   type: 'UPDATE_TASK',
-      //   payload: taskOBJ
-      // })
-    } else {
-      addTask(taskOBJ);
-      // taskDispatch({
-      //   type: 'ADD_TASK',
-      //   payload: taskOBJ
-      // })
-    }
+    if (selectedTask) updateTask(taskOBJ);
+    else addTask(taskOBJ);
 
     setTitle("");
     setDescription("");
@@ -80,10 +71,7 @@ const CreateNewTask = () => {
 
   const deleteHandler = (id) => {
     deleteTask(id);
-    // taskDispatch({
-    //   type: 'REMOVE_TASK',
-    //   payload: id
-    // })
+
     setTitle("");
     setDescription("");
     setLabelSelected("#FF006E");

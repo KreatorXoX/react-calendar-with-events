@@ -1,15 +1,8 @@
-import { useEffect } from "react";
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import dayjs from "dayjs";
 
 const initialMonth = dayjs().month();
-
-// const taskInit = () => {
-//   const storageTasks = localStorage.getItem("savedTasks");
-//   const parsedTasks = storageTasks ? JSON.parse(storageTasks) : [];
-//   return parsedTasks;
-// };
 
 export const useCalendarStore = create(
   devtools(

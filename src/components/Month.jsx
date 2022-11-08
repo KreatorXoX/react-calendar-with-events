@@ -1,8 +1,11 @@
 import React from "react";
-import Day from "./Day";
-import styles from "./Month.module.css";
-import { useCalendarStore } from "../context/CalenderZustand";
 import dayjs from "dayjs";
+
+import { useCalendarStore } from "../context/CalenderZustand";
+import Day from "./Day";
+
+import styles from "./Month.module.css";
+
 const Month = ({ month }) => {
   const selectedDay = useCalendarStore((state) => state.selectedDay);
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
