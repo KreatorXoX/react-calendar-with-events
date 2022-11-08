@@ -1,29 +1,46 @@
-import create from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-import dayjs from 'dayjs'
+import { useEffect } from "react";
+import create from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import dayjs from "dayjs";
 
-const initialMonth = dayjs().month()
+const initialMonth = dayjs().month();
+
+// const taskInit = () => {
+//   const storageTasks = localStorage.getItem("savedTasks");
+//   const parsedTasks = storageTasks ? JSON.parse(storageTasks) : [];
+//   return parsedTasks;
+// };
 
 export const useCalendarStore = create(
   devtools(
     persist(
-      set => ({
+      (set) => ({
         currentDay: null,
         setCurrentDay: () => set({ currentDay: dayjs() }),
         monthIdx: initialMonth,
-        setMonthIdx: value => set({ monthIdx: value }),
+        setMonthIdx: (value) => set({ monthIdx: value }),
         selectedDay: null,
-        setSelectedDay: day => set({ selectedDay: day }),
+        setSelectedDay: (day) => set({ selectedDay: day }),
         openModal: false,
-        setOpenModal: value => set({ openModal: value }),
+        setOpenModal: (value) => set({ openModal: value }),
         selectedTask: null,
-        setSelectedTask: task => set({ selectedTask: task }),
+        setSelectedTask: (task) => set({ selectedTask: task }),
         tasks: [],
-        taskDispatch: ({ type, payload }) => {}
+        addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+        updateTask: (updatedTask) =>
+          set((state) => ({
+            tasks: state.tasks.map((task) =>
+              task.id === updatedTask.id ? updatedTask : task
+            ),
+          })),
+        deleteTask: (id) =>
+          set((state) => ({
+            tasks: state.tasks.filter((task) => task.id !== id),
+          })),
       }),
       {
-        name: 'CalendarStore'
+        name: "CalendarStore",
       }
     )
   )
-)
+);

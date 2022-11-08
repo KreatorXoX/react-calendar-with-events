@@ -1,33 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
-import CalendarHeader from './components/CalendarHeader'
-import Month from './components/Month'
-import Taskbar from './components/Taskbar'
-import { useCalendarStore } from './context/CalenderZustand'
+import CalendarHeader from "./components/CalendarHeader";
+import Month from "./components/Month";
+import Taskbar from "./components/Taskbar";
+import { useCalendarStore } from "./context/CalenderZustand";
 
-import { getMonth } from './util'
+import { getMonth } from "./util";
 
 function App() {
-  const monthIdx = useCalendarStore(state => state.monthIdx)
-  const setMonthIdx = useCalendarStore(state => state.setMonthIdx)
-  const setCurrentDay = useCalendarStore(state => state.setCurrentDay)
+  const tasks = useCalendarStore((state) => state.tasks);
+  const monthIdx = useCalendarStore((state) => state.monthIdx);
+  const setCurrentDay = useCalendarStore((state) => state.setCurrentDay);
+  const [currentMonth, setCurrentMonth] = useState(getMonth());
 
-  const [currentMonth, setCurrentMonth] = useState(getMonth())
+  // useEffect(() => {
+  //   localStorage.setItem("savedTasks", JSON.stringify(tasks));
+  // }, [tasks]);
 
   useEffect(() => {
-    setCurrentMonth(getMonth(monthIdx))
-    setCurrentDay()
-  }, [monthIdx])
+    setCurrentMonth(getMonth(monthIdx));
+    setCurrentDay();
+  }, [monthIdx]);
 
   return (
-    <div className='container'>
+    <div className="container">
       <CalendarHeader />
-      <div className='calendar'>
+      <div className="calendar">
         <Taskbar />
         <Month month={currentMonth} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
